@@ -10,8 +10,9 @@ const MapComponent = () => {
 	let [exploredArea, setExploredArea] = useState([]);
 	let [position, setPosition] = useState([ 51.53, 0.25 ]);
 
-    function handleNewPosition([latitude, longitude]) {
+	function handleNewPosition([latitude, longitude]) {
         const newPosition = new LatLng(latitude, longitude); // bottom right corner
+		setPosition(newPosition);
 
         // Find the closest point on the existing shape
         let closestDistance = undefined;
@@ -26,13 +27,25 @@ const MapComponent = () => {
         setExploredArea([...exploredArea, newPosition]);
 	};
 
+	const getGeoLocation = async () => {
+		if (!navigator.geolocation) return position;
+		return await navigator.geolocation.getCurrentPosition(
+			coords => setPosition([coords.coords.latitude, coords.coords.longitude]),
+			error => console.log(error.message)
+		);
+	}
+
 	useEffect(() => {
-		handleNewPosition(position);
+		const interval = setInterval(() => {
+			handleNewPosition(position);
+			getGeoLocation();
+		}, 5000);
+        return () => clearInterval(interval);
 	}, [position]);
 
     return (
 		<>
-			<MapContainer center={[51.5, 0.2]} zoom={13} style={{ height: '100vh', width: '100%' }}>
+			<MapContainer center={position} zoom={13} style={{ height: '100vh', width: '100%' }}>
 				<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 				<LayersControl position="topright">
 					<LayersControl.Overlay name="Turfs" checked>
@@ -43,7 +56,7 @@ const MapComponent = () => {
 						</LayerGroup>
 					</LayersControl.Overlay>
 					<LayersControl.Overlay name="Marker" checked>
-						<DraggableMarker coords={position} callback={setPosition} />
+						<DraggableMarker coords={position} setCoords={setPosition} callback={setPosition} />
 					</LayersControl.Overlay>
 				</LayersControl>
 			</MapContainer>
