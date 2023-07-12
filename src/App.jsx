@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import DraggableMarker from './components/DraggableMarker';
 
 const MapComponent = () => {
-	let [exploredArea, setExploredArea] = useState([]);
+	let [exploredArea, setExploredArea] = useState(JSON.parse(localStorage.getItem('area')) || []);
 	let [position, setPosition] = useState([ 51.53, 0.25 ]);
 
 	function handleNewPosition([latitude, longitude]) {
@@ -24,7 +24,8 @@ const MapComponent = () => {
 			}
 		}
 		if (closestDistance <= 100) return;
-        setExploredArea([...exploredArea, newPosition]);
+		setExploredArea([...exploredArea, newPosition]);
+		localStorage.setItem('area', JSON.stringify([...exploredArea, newPosition]));
 	};
 
 	const getGeoLocation = async () => {
