@@ -1,10 +1,11 @@
 #map {
 	width: 100%;
-	height: -webkit-fill-available;
+	height: 100vh;
 }
 
 body {
-	/* margin: 0; */
+	height: -webkit-fill-available;
+	margin: 0;
 }
 
 path {

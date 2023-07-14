@@ -46,7 +46,7 @@ export default function App() {
 
     return (
 		<section id="map">
-			<MapContainer center={position} zoom={14} style={{ height: '100vh' }}>
+			<MapContainer center={position} zoom={14} style={{ height: '-webkit-fill-available' }}>
 				<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
 				<PanToLocation align="bottomleft" setPosition={setPosition} />
