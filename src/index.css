@@ -1,6 +1,6 @@
 #map {
 	width: 100%;
-	min-height: 100%;
+	height: -webkit-fill-available;
 }
 
 body {
