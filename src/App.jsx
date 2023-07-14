@@ -45,22 +45,20 @@ export default function App() {
 	}, [position]);
 
     return (
-		<section id="map">
-			<MapContainer center={position} zoom={14} style={{ height: '-webkit-fill-available' }}>
-				<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+		<MapContainer center={position} zoom={14} style={{ minHeight: '100vh' }}>
+			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-				<PanToLocation align="bottomleft" setPosition={setPosition} />
+			<PanToLocation align="bottomleft" setPosition={setPosition} />
 
-				<LayersControl position="topright">
-					<LayersControl.Overlay name="Turfs" checked>
-						<TurfLayer area={exploredArea} color='purple' />
-					</LayersControl.Overlay>
+			<LayersControl position="topright">
+				<LayersControl.Overlay name="Turfs" checked>
+					<TurfLayer area={exploredArea} color='purple' />
+				</LayersControl.Overlay>
 
-					<LayersControl.Overlay name="Marker" checked>
-						<DraggableMarker coords={position} setCoords={setPosition} />
-					</LayersControl.Overlay>
-				</LayersControl>
-			</MapContainer>
-		</section>
+				<LayersControl.Overlay name="Marker" checked>
+					<DraggableMarker coords={position} setCoords={setPosition} />
+				</LayersControl.Overlay>
+			</LayersControl>
+		</MapContainer>
     );
 };
