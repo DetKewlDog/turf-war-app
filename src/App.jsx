@@ -45,7 +45,7 @@ export default function App() {
 	}, [position]);
 
     return (
-		<MapContainer center={position} zoom={14} style={{ minHeight: '95vh' }}>
+		<MapContainer center={position} zoom={14} style={{ height: '95vh' }}>
 			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
 			<PanToLocation align="bottomleft" setPosition={setPosition} />
