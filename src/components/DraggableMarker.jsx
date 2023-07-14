@@ -1,15 +1,23 @@
-import { useState, useRef, useMemo, useEffect } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import imgMarker from '../images/current-loc.svg';
 
-export default function DraggableMarker({ coords, setCoords, callback }) {
+const icon = new L.Icon({
+    iconUrl: imgMarker,
+    iconSize: [25, 25],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -12],
+});
+
+export default function DraggableMarker({ coords, setCoords }) {
     const markerRef = useRef(null);
     const eventHandlers = useMemo(() => ({
         dragend() {
             const marker = markerRef.current;
             if (marker === null) return;
             const newPosition = Object.values(marker.getLatLng());
-            setCoords(newPosition);
-            callback === undefined || callback(newPosition);
+            setCoords(newPosition);;
         }
     }), []);
 
@@ -18,7 +26,7 @@ export default function DraggableMarker({ coords, setCoords, callback }) {
     }, [coords]);
 
     return (
-        <Marker draggable={false} eventHandlers={eventHandlers} position={coords} ref={markerRef}>
+        <Marker draggable={false} eventHandlers={eventHandlers} position={coords} ref={markerRef} icon={icon}>
             <Popup>{`${coords[0]}, ${coords[1]}`}</Popup>
         </Marker>
     );
