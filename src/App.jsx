@@ -48,7 +48,7 @@ export default function App() {
 		<MapContainer center={position} zoom={14} style={{ height: '100vh' }}>
 			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-			<PanToLocation align="bottomleft" setPosition={setPosition} />
+			<PanToLocation align="topleft" setPosition={setPosition} />
 
 			<LayersControl position="topright">
 				<LayersControl.Overlay name="Turfs" checked>
