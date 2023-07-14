@@ -28,10 +28,6 @@ svg {
 	right: 0;
 }
 
-*:has(> .fas):hover > .fas:before {
-	color: darkslategray;
-}
-
 *:has(> .fas) {
 	background-size: 44px 44px;
 	width: 44px;
