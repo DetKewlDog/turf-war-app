@@ -1,10 +1,9 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import imgMarker from '../images/current-loc.svg';
 
 const icon = new L.Icon({
-    iconUrl: imgMarker,
+    iconUrl: 'https://cdn.discordapp.com/attachments/801426473059614730/1131177633904865390/current-loc.svg',
     iconSize: [25, 25],
     iconAnchor: [12, 12],
     popupAnchor: [0, -12],
